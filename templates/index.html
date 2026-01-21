@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>House Price Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>House Price Prediction System</h1>
+    <p class="subtitle">Enter house details to predict SalePrice</p>
+
+    <form method="POST" class="card">
+      <div class="grid">
+        <div class="field">
+          <label>Overall Quality (OverallQual)</label>
+          <input type="number" step="1" min="1" max="10" name="OverallQual" required placeholder="e.g., 7">
+        </div>
+
+        <div class="field">
+          <label>Above Ground Living Area (GrLivArea)</label>
+          <input type="number" step="1" min="0" name="GrLivArea" required placeholder="e.g., 1500">
+        </div>
+
+        <div class="field">
+          <label>Total Basement Area (TotalBsmtSF)</label>
+          <input type="number" step="1" min="0" name="TotalBsmtSF" required placeholder="e.g., 800">
+        </div>
+
+        <div class="field">
+          <label>Garage Cars (GarageCars)</label>
+          <input type="number" step="1" min="0" max="5" name="GarageCars" required placeholder="e.g., 2">
+        </div>
+
+        <div class="field">
+          <label>Year Built (YearBuilt)</label>
+          <input type="number" step="1" min="1800" max="2026" name="YearBuilt" required placeholder="e.g., 2005">
+        </div>
+
+        <div class="field">
+          <label>Neighborhood</label>
+          <input type="text" name="Neighborhood" required placeholder="e.g., NAmes">
+          <small>Tip: Use a valid neighborhood from the dataset (e.g., NAmes, CollgCr, OldTown).</small>
+        </div>
+      </div>
+
+      <button type="submit">Predict Price</button>
+    </form>
+
+    {% if prediction %}
+      <div class="result success">
+        <h2>Predicted House Price:</h2>
+        <p class="price">{{ prediction }}</p>
+      </div>
+    {% endif %}
+
+    {% if error %}
+      <div class="result error">
+        <p>{{ error }}</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
